@@ -1,8 +1,0 @@
-﻿﻿<Project>
-	<PropertyGroup>
-		<PluginName>OopsAllScouts</PluginName>
-		<RootNamespace>OopsAllScouts</RootNamespace>
-		<AssemblyName>$(PluginName)</AssemblyName>
-		<Version>1.0.0</Version>
-	</PropertyGroup>
-</Project>
