@@ -1,9 +1,9 @@
 
 # Overview
 
-- This mod adds a new terminal command, "NMAP", that allows you to mark resources, consumables and stationary objects of interest in the current zone (and not only, see later)
+- This mod adds a new terminal command, "NMAP", that allows you to mark resources, consumables and stationary objects of interest in the current zone (and not only, see below)
 
-- The command is intended first and foremost for solo runs, when there are no second human player to man the terminal, but can be useful in multiplayer runs as well
+- The command is intended first and foremost for solo runs, when there isn't a second human player to man the terminal, but can be useful in multiplayer runs as well
 
 - Marked resources can be displayed for configurable timeout, in range from 30 to 600 seconds, or permanently
 
@@ -19,9 +19,9 @@
 NMAP -T 120 RES CON E_49
 </pre>
 
-Similarly to LIST command, full names "RESOURCES" and "CONSUMABLES" can be shortened to first 3+ letters, "RES" "CON"
+ - Similarly to LIST command, full names "RESOURCES" and "CONSUMABLES" can be shortened to first three or more letters, e.g. "RES" and "CON"
 
-Normally, consumables cannot be pinged with PING or listed, as they lack unique terminal ID's, but NMAP can help you quickly locate them
+ - Normally, consumables cannot be pinged with PING or listed as they lack unique terminal ID's, but NMAP can help you quickly locate them
 
 
 ### Maping key resource item for extended time in the current zone
@@ -31,12 +31,14 @@ NMAP -T 600 CELL_702 E_713
 NMAP -T 600 KEY_PURPLE_546 E_709
 </pre>
 
-When aforementioned item is located deep in infectious fog on the distance 200m+, makes finding it in solo runs possible (R2D1)
+ - When a key item is located deep in infectious fog over 200m away, NMAP makes finding it in solo runs possible (R2D1)
 
 
 ### Mapping a number of key items in the current zone
 
+<pre>
 NMAP -T 300 GLP E_12
+</pre>
 
 ID's, GLP-2 canisters (R7C1), HDD's, data cubes etc.
 
@@ -48,11 +50,11 @@ NMAP -P TERMINAL_862 TERMINAL_754 E_614
 NMAP -P BULKHEAD_DC_320 E_614
 </pre>
 
- - Need to quickly find a terminal with keyword in another zone during reactor scan (R2D2)? No problem.
+ - Need to quickly find a terminal with a keyword in another zone during reactor scan (R2D2)? No problem.
  - Run between two terminals to complete uplink verification in OSHA non-compliant and confusing level layout? Easy.
- - Bulkhead door controller is located deep in the fog and you need to quickly return to it? We got you covered.
+ - Bulkhead door controller is located deep in the fog and you need to quickly return to it? We've got you covered.
 
-Permanent markers will not reset with subsequent NMAP scans and will stay put until the end of rundown, unless explicitly removed with
+Permanent markers will not reset with subsequent NMAP scans and will remain active until the end of the rundown unless explicitly removed with:
 
 <pre>
 NMAP -R
@@ -61,12 +63,12 @@ NMAP -R
 
 # Sample on-screen output
 
-In addition to visible navigation markers, Santonian Netmap displays useful information about mapped items. The first 3 columns resemble ones from the LIST command, but "SPECIAL NOTES" column adds extra information:
+In addition to visible navigation markers, Santonian Netmap displays useful information about mapped items. The first three columns resemble ones from the LIST command, but "SPECIAL NOTES" column adds extra information:
 
- * zone number, where SEC_DOOR_### opens passage to
- * keycard name required to access security door, if any
- * size and number of uses of the resource pack
- * misc information, such as name, gender and age of HSU (ex-)inhabitant
+ - zone number, where SEC_DOOR_### opens passage to
+ - keycard name required to access a security door, if any
+ - size and number of uses of resource packs
+ - miscellaneous information, such as name, gender and age of HSU (ex-)inhabitant
 
 <pre>
 \\Root\NMAP -A E_49
@@ -107,15 +109,17 @@ Scan has finished, 21 items discovered
 
 # Implementation details
 
-- Technically NMAP can assign navigation markers in milliseconds, but it will break immersion. Furthemore, to allign better with PING and introduce heavier cost for broad scans, the scan time depends on the number of items found and calculated using the following formula:
+- Technically NMAP can assign navigation markers in milliseconds, but this would break immersion. To allign better with PING and introduce heavier cost for broad scans, the scan time depends on the number of items found and calculated using the following formula:
 
+<pre>
 T = Tp + N*Tn
+</pre>
 
-Tp = 2.0 sec
-Tn = 0.5 sec
+Where:
+    - Tp = 2.0 sec
+    - Tn = 0.5 sec
 
-- Likewise, it's possible to mark resources, consumables and key items outside of the current zone or _all_ the items in the level. However, the game design often encompasses looking for terminal in the current zone. Ability to mark large stationary objects (security doors,
-terminal, bulkhead door controllers) outside of the current zone was left as it doesn't break immersion, yet helps with aforementioned scenarios during complex reactor scans and uplink objectives
+- Likewise, it's possible to mark resources, consumables, and key items outside of the current zone or _all_ items in the level. However, the game design often encompasses looking for terminal in the current zone. The ability to mark large stationary objects (security doors, terminals, bulkhead door controllers) outside of the current zone was left as it doesn't break immersion, yet helps with aforementioned scenarios during complex reactor scans and uplink objectives
 
 Additionally, having too many navigation markers at the same time clutters the view and, if markers are located too far away, makes them unreadable
 
@@ -128,43 +132,3 @@ Thanks to Fridolin. Santonian Netmap started as an extension to Frido's Smart Pi
 # Note
 
 NMAP is a referrence to Linux NMAP command, aka "Network Mapper" (man 1 nmap)
-
-
-============ Change Log ============
-
-v1.0.1
- - Add permanent navigation marker support
-
-v1.0.0
- - Add README.md, Thunderstore manifest, mod icon
-
-v0.9.9
- - Add full command-line parsing support
- - Fix Logger tag
-
-v0.9.8
- - Add support for generators, bulkhead door controllers, doors and containers
-
-v0.9.7
- - Add support for Terminal and HSU objects
-
-v0.9.6
- - Add support for remote zone scans
-
-v0.9.5
- - Add dynamic scan timeout support
-
-v0.9.4
- - Add consumables mapping support
-
-v0.9.3
- - Fix removal of the key item navigation markers
-
-v0.9.2
- - Introduce command-line parsing function
-
-v0.9.1
- - Refactor the code, optimize nested loops
-
-v0.9.0
- - Initial Commit
