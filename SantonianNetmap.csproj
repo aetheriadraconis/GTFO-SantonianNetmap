@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+
+		<!--
+		Use the following property to set your preferred r2modman profile
+		-->
+		<Profile>Test</Profile>
+		<SolutionName>SantonianNetmap</SolutionName>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<TargetFramework>net6</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<Platforms>AnyCPU;x64</Platforms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<DebugType>None</DebugType>
+		<AssemblyName>SantonianNetmap</AssemblyName>
+		<RootNamespace>Santonian</RootNamespace>
+		<BepInEx>/data/mods/R2ModMan/data/GTFO/profiles/$(Profile)/BepInEx</BepInEx>
+		<BuildDirectory>$(BepInEx)/plugins/hirnukuono-$(SolutionName)/</BuildDirectory>
+		<OutputPath>$(BuildDirectory)</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+	<Target Name="PostBuild" BeforeTargets="PostBuildEvent">
+		<Delete Files="$(OutputPath)$(AssemblyName).deps.json" />
+	</Target>
+	<Import Project="Dependencies.props" />
+
+</Project>

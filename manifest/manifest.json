@@ -1,0 +1,9 @@
+{
+  "name": "Santonian Netmap",
+  "version_number": "1.0.0",
+  "website_url": "",
+  "description": "Santonian Holographic Netmap",
+  "dependencies": [
+    "BepInEx-BepInExPack_GTFO-3.0.0"
+  ]
+}

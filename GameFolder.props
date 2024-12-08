@@ -1,0 +1,5 @@
+﻿<Project>
+    <PropertyGroup>
+        <GameFolder>/data/local/share/Steam/steamapps/common/GTFO</GameFolder>
+    </PropertyGroup>
+</Project>
